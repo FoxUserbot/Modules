@@ -5,7 +5,6 @@ from plugins.settings.main_settings import module_list, file_list, settings
 import os
 
 prefix = settings['prefix']
-requirements = ""
 
 @Client.on_message(filters.command(["q", "quote"], prefixes=prefix) & filters.me)
 async def quote_cmd(client: Client, message: types.Message):
