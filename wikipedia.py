@@ -34,5 +34,5 @@ async def wiki(client: Client, message: Message):
 <code>{exc}</code>"""
         )
 
-module_list['Example'] = f'{prefix}example_edit'
-file_list['Example'] = 'example.py'
+module_list['Wikipedia'] = f'{prefix}wiki [word]'
+file_list['Wikipedia'] = 'wiki.py'
