@@ -4,7 +4,8 @@ from pyrogram import Client, filters, errors, types
 from plugins.settings.main_settings import module_list, file_list, settings
 import os
 
-prefix = settings['prefix']
+from prefix import my_prefix
+prefix = my_prefix()
 
 @Client.on_message(filters.command(["q", "quote"], prefixes=prefix) & filters.me)
 async def quote_cmd(client: Client, message: types.Message):
