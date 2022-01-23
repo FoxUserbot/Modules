@@ -3,7 +3,8 @@ from pyrogram.types import Message
 from covid import Covid
 from plugins.settings.main_settings import module_list, file_list, settings
 
-prefix = settings['prefix']
+from prefix import my_prefix
+prefix = my_prefix()
 
 @Client.on_message(filters.command("covid", prefixes=prefix) & filters.me)
 async def covid_local(client: Client, message: Message):
