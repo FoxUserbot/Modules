@@ -7,7 +7,7 @@ from prefix import my_prefix
 prefix = my_prefix()
 
 
-@Client.on_message(filters.command("kickall iris", prefixes=prefix) & filters.me)
+@Client.on_message(filters.command("iris_kickall", prefixes=prefix) & filters.me)
 async def tagall(client, message):
     await message.delete()
     chat_id = message.chat.id
@@ -20,5 +20,5 @@ async def tagall(client, message):
         await asyncio.sleep(2)
 
 
-module_list['Tagall'] = f'{prefix}tagall'
-file_list['Tagall'] = 'tagall.py'
+module_list['Kickall(iris)'] = f'{prefix}iris_kickall'
+file_list['Kickall(iris)'] = 'kickall_iris.py'
