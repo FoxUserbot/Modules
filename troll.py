@@ -185,5 +185,5 @@ async def loveyou(client, message):
 
 
 
-module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {[prefix]}policya'
+module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {prefix}policya | {prefix}loveyou'
 file_list['Troll'] = 'troll.py'
