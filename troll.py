@@ -1,5 +1,4 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
 from plugins.settings.main_settings import module_list, file_list
 import asyncio
 import random
@@ -7,9 +6,9 @@ import random
 from prefix import my_prefix
 prefix = my_prefix()
 
-app = Client
-@app.on_message(filters.command("hack", prefix) & filters.me)
-async def hack(client: Client, message: Message):
+
+@Client.on_message(filters.command("hack", prefix) & filters.me)
+async def hack(client, message):
     perc = 0
     while perc < 100:
         text = "👮 Взлом пентагона в процессе ..." + str(perc) + "%"
@@ -29,9 +28,9 @@ async def hack(client: Client, message: Message):
     text = "🐓Нашли файты что ты петух!"
     await message.edit(text)
 
-# Команда Взлома жопы
-@app.on_message(filters.command("jopa", prefix) & filters.me)
-async def jopa(client: Client, message: Message):
+
+@Client.on_message(filters.command("jopa", prefix) & filters.me)
+async def jopa(client, message):
     perc = 0
     while perc < 100:
         text = "🍑 Взлом жопы в процессе ..." + str(perc) + "%"
@@ -67,9 +66,9 @@ async def jopa(client: Client, message: Message):
     text = "💸 Вы заработали " + str(bal) + " ₽"
     await message.edit(text)
 
-# Наркота
-@app.on_message(filters.command("drugs", prefix) & filters.me)
-async def drugs(client: Client, message: Message):
+
+@Client.on_message(filters.command("drugs", prefix) & filters.me)
+async def drugs(client, message):
     perc = 0
     result = 0
     while perc < 100:
@@ -90,9 +89,9 @@ async def drugs(client: Client, message: Message):
     drug = random.choice(drugsss)
     await message.edit(drug)
 
-# Оскорбление мамки
-@app.on_message(filters.command("mum", prefix) & filters.me)
-async def mum(client: Client, message: Message):
+
+@Client.on_message(filters.command("mum", prefix) & filters.me)
+async def mum(client, message):
     text = "🔍 Поиск твоей мамки начался..."
     await message.edit(str(text))
     await asyncio.sleep(3.0)
@@ -124,5 +123,67 @@ async def mum(client: Client, message: Message):
     await message.edit(str(text))
 
 
-module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum'
+@Client.on_message(filters.command("policya", prefix) & filters.me)
+async def policya(client, message):
+    red_blue = "🔴🔴🔴⬜⬜⬜🔵🔵🔵"
+    blue_red = "🔵🔵🔵⬜⬜⬜🔴🔴🔴"
+    duration = 0
+    try:
+        need_duration = int(message.command[1])
+    except:
+        need_duration = 3
+    while need_duration != duration:
+        await message.edit(f"{red_blue}\n" * 3)
+        await asyncio.sleep(0.4)
+        await message.edit(f"{blue_red}\n" * 3)
+        await asyncio.sleep(0.4)
+        duration += 1
+    await message.edit("**Никому ни с места!**\nПрибыла **🚨 Полиция 🚨**...\nГотовь вещички, **сынок**.")
+
+
+@Client.on_message(filters.command("loveyou", prefix) & filters.me)
+async def loveyou(client, message):
+    numbers = 0
+    hearth = """
+🤍🤍🤍🤍🤍🤍🤍🤍🤍
+🤍🤍🖤🖤🤍🖤🖤🤍🤍
+🤍🖤🖤🖤🖤🖤🖤🖤🤍
+🤍🖤🖤🖤🖤🖤🖤🖤🤍
+🤍🖤🖤🖤🖤🖤🖤🖤🤍
+🤍🤍🖤🖤🖤🖤🖤🤍🤍
+🤍🤍🤍🖤🖤🖤🤍🤍🤍
+🤍🤍🤍🤍🖤🤍🤍🤍🤍
+🤍🤍🤍🤍🤍🤍🤍🤍🤍
+    """
+
+    await message.edit(("🤍" * 9 + "\n") * 9)
+    await asyncio.sleep(0.5)
+
+    redhearth = hearth.replace("🖤", "❤️")
+    await message.edit(redhearth)
+    list_color = ["🧡", "💛", "💚", "💙", "💜", "❤️"]
+    for returns in range(3):
+        for i in list_color:
+            await message.edit(hearth.replace("🖤", i))
+    try:
+        while True:
+            await message.edit(redhearth[:len(redhearth) - numbers])
+            numbers += 3
+    except:
+        pass
+    await message.edit("🤍 🪄🪄🪄")
+    await asyncio.sleep(1)
+    await message.edit("❤️ 🪄🪄🪄")
+    await asyncio.sleep(0.4)
+    await message.edit("❤️ I")
+    await asyncio.sleep(0.4)
+    await message.edit("❤️ I love")
+    await asyncio.sleep(0.4)
+    await message.edit("❤️ I love you")
+    await asyncio.sleep(1)
+    await message.edit("❤️ I love you <3")
+
+
+
+module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {[prefix]}policya'
 file_list['Troll'] = 'troll.py'

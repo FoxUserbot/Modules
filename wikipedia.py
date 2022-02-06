@@ -1,13 +1,13 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
 from plugins.settings.main_settings import module_list, file_list
 import wikipedia
 
 from prefix import my_prefix
 prefix = my_prefix()
 
+
 @Client.on_message(filters.command("wiki", prefixes=prefix) & filters.me)
-async def wiki(client: Client, message: Message):
+async def wiki(client, message):
     lang = message.command[1]
     user_request = " ".join(message.command[2:])
     await message.edit("<b>Search info</b>")

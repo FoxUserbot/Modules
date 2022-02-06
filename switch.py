@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
+
 from plugins.settings.main_settings import module_list, file_list
 import asyncio
 import time
@@ -7,8 +7,9 @@ import time
 from prefix import my_prefix
 prefix = my_prefix()
 
+
 @Client.on_message(filters.command("sw", prefix) & filters.me)
-async def switch(client: Client, message: Message):
+async def switch(client, message):
     text = " ".join(message.command[1:])
     ru_keys = """ёйцукенгшщзхъфывапролджэячсмитьбю.Ё"№;%:?ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,"""
     en_keys = """`qwertyuiop[]asdfghjkl;'zxcvbnm,./~@#$%^&QWERTYUIOP{}ASDFGHJKL:"|ZXCVBNM<>?"""

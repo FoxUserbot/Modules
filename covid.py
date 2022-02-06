@@ -1,13 +1,13 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
 from covid import Covid
 from plugins.settings.main_settings import module_list, file_list, settings
 
 from prefix import my_prefix
 prefix = my_prefix()
 
+
 @Client.on_message(filters.command("covid", prefixes=prefix) & filters.me)
-async def covid_local(client: Client, message: Message):
+async def covid_local(client, message):
     region = " ".join(message.command[1:])
     await message.edit("<code>Data retrieval...</code>")
     covid = Covid(source="worldometers")
@@ -31,7 +31,7 @@ async def covid_local(client: Client, message: Message):
 
 
 @Client.on_message(filters.command("regions", prefixes=prefix) & filters.me)
-async def regions(client: Client, message: Message):
+async def regions(client, message):
     countr = ""
     await message.edit("<code>Data retrieval...</code>")
     covid = Covid(source="worldometers")

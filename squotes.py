@@ -7,8 +7,9 @@ import os
 from prefix import my_prefix
 prefix = my_prefix()
 
+
 @Client.on_message(filters.command(["q", "quote"], prefixes=prefix) & filters.me)
-async def quote_cmd(client: Client, message: types.Message):
+async def quote_cmd(client, message):
     if not message.reply_to_message:
         return await message.edit("<b>Specify message(s) for quote</b>")
 
@@ -362,15 +363,15 @@ def get_full_name(user: types.User) -> str:
     if user.last_name:
         name += " " + user.last_name
     return name
-    
+
+
 @Client.on_message(filters.command('squotes_help', prefixes=prefix) & filters.me)
 async def squotes_help(client, message):
     await message.edit("""**!q [reply] [count] [args] - Создать цитату 
 Доступные аргументы: !png — отправить цитату в формате png; !me — отправить цитату в сохраненные сообщения; !noreply - сделать цитату без ответа сообщение.
 
 !fq [ответ] [аргументы] [текст] - Создать фальшивую цитату**""")
-    
-    
+
+
 module_list['Squotes'] = f"Many commands. View them: {prefix}squotes_help."
 file_list['Squotes'] = 'squotes.py'
-

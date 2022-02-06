@@ -1,5 +1,4 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
 from plugins.settings.main_settings import module_list, file_list
 from gtts import gTTS
 import os
@@ -7,8 +6,9 @@ import os
 from prefix import my_prefix
 prefix = my_prefix()
 
+
 @Client.on_message(filters.command("voice", prefix) & filters.me)
-async def voice(client: Client, message: Message):
+async def voice(client, message):
     lang_code = os.environ.get("lang_code", "en")
     cust_lang = None
     await message.delete()
@@ -24,6 +24,7 @@ async def voice(client: Client, message: Message):
     else:
         await client.send_voice(message.chat.id, voice="temp/voice.mp3")
     os.remove("temp/voice.mp3")
+
 
 module_list['TextToVoice'] = f'{prefix}voice [Text]'
 file_list['TextToVoice'] = 'speech.py'
