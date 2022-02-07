@@ -143,7 +143,7 @@ async def policya(client, message):
 
 @Client.on_message(filters.command("loveyou", prefix) & filters.me)
 async def loveyou(client, message):
-    numbers = 0
+    numbers = 4
     hearth = """
 🤍🤍🤍🤍🤍🤍🤍🤍🤍
 🤍🤍🖤🖤🤍🖤🖤🤍🤍
@@ -154,7 +154,7 @@ async def loveyou(client, message):
 🤍🤍🤍🖤🖤🖤🤍🤍🤍
 🤍🤍🤍🤍🖤🤍🤍🤍🤍
 🤍🤍🤍🤍🤍🤍🤍🤍🤍
-    """
+"""
 
     await message.edit(("🤍" * 9 + "\n") * 9)
     await asyncio.sleep(0.5)
@@ -167,10 +167,13 @@ async def loveyou(client, message):
             await message.edit(hearth.replace("🖤", i))
     try:
         while True:
-            await message.edit(redhearth[:len(redhearth) - numbers])
-            numbers += 3
-    except:
-        pass
+            numbers += 2
+            Str = redhearth
+            l = len(Str)
+            await message.edit(Str[:l - numbers])
+            await asyncio.sleep(0.01)
+    except Exception as f:
+        print(f)
     await message.edit("🤍 🪄🪄🪄")
     await asyncio.sleep(1)
     await message.edit("❤️ 🪄🪄🪄")
