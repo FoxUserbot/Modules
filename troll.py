@@ -188,5 +188,27 @@ async def loveyou(client, message):
 
 
 
-module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {prefix}policya | {prefix}loveyou'
+# Переменные с кастомом
+end_message = 'l l let me die'
+messages_per_second = 7
+sleep_time_ghoul = 0.1
+
+
+@Client.on_message(filters.command("я гуль", prefixes=prefix) & filters.me)
+async def ghoul_spam_handler(client, message):
+    i = 1000
+    while i > 0:
+        try:
+            await client.send_message(message.chat.id, f'{i} - 7 = {i-7}')
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+
+        i -= 7
+        await asyncio.sleep(1/messages_per_second)
+
+    if end_message != '':
+        await client.send_message(message.chat.id, end_message)
+
+
+module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {prefix}policya | {prefix}loveyou | {prefix}Я гуль'
 file_list['Troll'] = 'troll.py'
