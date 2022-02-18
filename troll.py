@@ -25,7 +25,7 @@ async def hack(client, message):
         perc += random.randint(1, 5)
         await asyncio.sleep(0.15)
     await asyncio.sleep(1)
-    text = "🐓Нашли файты что ты петух!"
+    text = "🐓Нашли файлы что ты петух!"
     await message.edit(text)
 
 
