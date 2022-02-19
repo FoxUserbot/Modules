@@ -58,7 +58,7 @@ async def jopa(client, message):
         await message.edit(str(text))
         perc += random.randint(1, 5)
         await asyncio.sleep(0.15)
-    text = "✅ Проданно"
+    text = "✅ Продано"
     await message.edit(str(text))
     await asyncio.sleep(2)
     rand = random.randint(100, 5000)
@@ -101,7 +101,7 @@ async def mum(client, message):
         await message.edit(str(text))
         perc += random.randint(1, 3)
         await asyncio.sleep(0.75)
-    text = "❌ Мамаша не найденна"
+    text = "❌ Мамаша не найдена"
     await message.edit(str(text))
     await asyncio.sleep(3.0)
     perc = 0
@@ -110,7 +110,7 @@ async def mum(client, message):
         await message.edit(str(text))
         perc += random.randint(1, 5)
         await asyncio.sleep(0.75)
-    text = "❌ Мамаша не найденна"
+    text = "❌ Мамаша не найдена"
     await message.edit(str(text))
 
     perc = 0
@@ -171,12 +171,11 @@ async def loveyou(client, message):
             Str = redhearth
             l = len(Str)
             await message.edit(Str[:l - numbers])
-            await asyncio.sleep(0.01)
     except Exception as f:
         print(f)
-    await message.edit("🤍 🪄🪄🪄")
+    await message.edit("🤍 🪄🪄")
     await asyncio.sleep(1)
-    await message.edit("❤️ 🪄🪄🪄")
+    await message.edit("❤️ 🪄🪄")
     await asyncio.sleep(0.4)
     await message.edit("❤️ I")
     await asyncio.sleep(0.4)
@@ -190,7 +189,7 @@ async def loveyou(client, message):
 
 # Переменные с кастомом
 end_message = 'l l let me die'
-messages_per_second = 7
+messages_per_second = 10
 sleep_time_ghoul = 0.1
 
 
