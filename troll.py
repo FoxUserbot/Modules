@@ -11,7 +11,7 @@ prefix = my_prefix()
 async def hack(client, message):
     perc = 0
     while perc < 100:
-        text = "👮 Взлом пентагона в процессе ..." + str(perc) + "%"
+        text = "👮 Взлом пентагона в процессе..." + str(perc) + "%"
         await message.edit(str(text))
         perc += random.randint(1, 3)
         await asyncio.sleep(0.1)
@@ -20,12 +20,12 @@ async def hack(client, message):
     await asyncio.sleep(3)
     perc = 0
     while perc < 100:
-        text = "⬇️ Скачивание данных ..." + str(perc) + "%"
+        text = "⬇️ Скачивание данных..." + str(perc) + "%"
         await message.edit(str(text))
         perc += random.randint(1, 5)
         await asyncio.sleep(0.15)
     await asyncio.sleep(1)
-    text = "🐓Нашли файлы что ты петух!"
+    text = "🐓 Нашли файлы что ты петух!"
     await message.edit(text)
 
 
@@ -33,7 +33,7 @@ async def hack(client, message):
 async def jopa(client, message):
     perc = 0
     while perc < 100:
-        text = "🍑 Взлом жопы в процессе ..." + str(perc) + "%"
+        text = "🍑 Взлом жопы в процессе..." + str(perc) + "%"
         await message.edit(str(text))
         perc += random.randint(1, 3)
         await asyncio.sleep(0.1)
@@ -45,7 +45,7 @@ async def jopa(client, message):
     perc = 0
     await asyncio.sleep(3)
     while perc < 100:
-        text = "⬇️ Скачивание сливов ..." + str(perc) + "%"
+        text = "⬇️ Скачивание сливов..." + str(perc) + "%"
         await message.edit(str(text))
         perc += random.randint(1, 4)
         await asyncio.sleep(0.15)
@@ -54,7 +54,7 @@ async def jopa(client, message):
     perc = 0
     await asyncio.sleep(5)
     while perc < 100:
-        text = "⬆️ Продажа сливов барыге..." + str(perc) + "%"
+        text = "💰 Продажа сливов барыге..." + str(perc) + "%"
         await message.edit(str(text))
         perc += random.randint(1, 5)
         await asyncio.sleep(0.15)
@@ -72,20 +72,20 @@ async def drugs(client, message):
     perc = 0
     result = 0
     while perc < 100:
-        text = "🍁Поиск запрещённых препаратов " + str(perc) + "%"
+        text = "💊 Поиск запрещённых препаратов " + str(perc) + "%"
         await message.edit(str(text))
         perc += random.randint(1, 3)
         await asyncio.sleep(0.1)
-    text = "Найдено 3 кг шпекса🍪💨"
+    text = "🚬 Найдено 3 кг шпекса"
     await message.edit(str(text))
     await asyncio.sleep(3)
-    text = "Оформляем вкид 🌿⚗️"
+    text = "🌿⚗️ Оформляем вкид"
     await message.edit(str(text))
     await asyncio.sleep(5)
-    drugsss = ['🔥😳 Вас успешно откачали, пожалуйста, больше не принимайте запрещённые препараты 😳🔥',
-               '🥴Вы пожилой наркоман, вас не берёт одна доза, вам необходимо больше, попробуйте  ещё раз оформить вкид🥴',
-               '😖Сегодня не ваш день, вы хоть и пожилой, но приняли слишком много. Окончательная причина смерти - передоз😖',
-               '😌Вы оформили вкид, Вам понравилось)😌']
+    drugsss = ['😳 Вас успешно откачали, пожалуйста, больше не принимайте запрещённые препараты',
+               '🥴 Вы пожилой наркоман, вас не берёт одна доза, вам необходимо больше, попробуйте  ещё раз оформить вкид',
+               '😖 Сегодня не ваш день, вы хоть и пожилой, но приняли слишком много. Окончательная причина смерти - передоз',
+               '😌 Вы оформили вкид, Вам понравилось']
     drug = random.choice(drugsss)
     await message.edit(drug)
 
@@ -119,30 +119,30 @@ async def mum(client, message):
         await message.edit(str(text))
         perc += random.randint(1, 5)
         await asyncio.sleep(0.75)
-    text = "✅ Мамка найдена... Она в канаве"
+    text = "**✅ Мамка найдена...** Она в канаве"
     await message.edit(str(text))
 
 
-@Client.on_message(filters.command("policya", prefix) & filters.me)
-async def policya(client, message):
+@Client.on_message(filters.command("police", prefix) & filters.me)
+async def police(client, message):
     red_blue = "🔴🔴🔴⬜⬜⬜🔵🔵🔵"
     blue_red = "🔵🔵🔵⬜⬜⬜🔴🔴🔴"
     duration = 0
     try:
         need_duration = int(message.command[1])
     except:
-        need_duration = 3
+        need_duration = 5
     while need_duration != duration:
         await message.edit(f"{red_blue}\n" * 3)
-        await asyncio.sleep(0.4)
+        await asyncio.sleep(0.3)
         await message.edit(f"{blue_red}\n" * 3)
-        await asyncio.sleep(0.4)
+        await asyncio.sleep(0.3)
         duration += 1
-    await message.edit("**Никому ни с места!**\nПрибыла **🚨 Полиция 🚨**...\nГотовь вещички, **сынок**.")
+    await message.edit("**Никому ни с места!**\nПрибыла **🚨 Полиция 🚨**\nГотовь вещички, **сынок**.")
 
 
-@Client.on_message(filters.command("loveyou", prefix) & filters.me)
-async def loveyou(client, message):
+@Client.on_message(filters.command("love", prefix) & filters.me)
+async def love(client, message):
     numbers = 4
     hearth = """
 🤍🤍🤍🤍🤍🤍🤍🤍🤍
@@ -171,29 +171,30 @@ async def loveyou(client, message):
             Str = redhearth
             l = len(Str)
             await message.edit(Str[:l - numbers])
+            await asyncio.sleep(0.01)
     except Exception as f:
         print(f)
-    await message.edit("🤍 🪄🪄")
+    await message.edit("🤍 🪄🪄🪄")
     await asyncio.sleep(1)
-    await message.edit("❤️ 🪄🪄")
+    await message.edit("❤️ 🪄🪄🪄")
     await asyncio.sleep(0.4)
-    await message.edit("❤️ I")
+    await message.edit("**❤️ Я**")
     await asyncio.sleep(0.4)
-    await message.edit("❤️ I love")
+    await message.edit("**❤️ Я люблю**")
     await asyncio.sleep(0.4)
-    await message.edit("❤️ I love you")
+    await message.edit("**❤️ Я люблю тебя**")
     await asyncio.sleep(1)
-    await message.edit("❤️ I love you <3")
+    await message.edit("**❤️ Я люблю тебя <3**")
 
 
 
 # Переменные с кастомом
-end_message = 'l l let me die'
-messages_per_second = 10
+end_message = '**1000-7, я умер, прости**'
+messages_per_second = 7
 sleep_time_ghoul = 0.1
 
 
-@Client.on_message(filters.command("я гуль", prefixes=prefix) & filters.me)
+@Client.on_message(filters.command("ghoul", prefixes=prefix) & filters.me)
 async def ghoul_spam_handler(client, message):
     i = 1000
     while i > 0:
@@ -209,5 +210,5 @@ async def ghoul_spam_handler(client, message):
         await client.send_message(message.chat.id, end_message)
 
 
-module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {prefix}policya | {prefix}loveyou | {prefix}Я гуль'
+module_list['Troll'] = f'{prefix}hack | {prefix}jopa | {prefix}drugs | {prefix}mum | {prefix}police | {prefix}love | {prefix}ghoul'
 file_list['Troll'] = 'troll.py'
