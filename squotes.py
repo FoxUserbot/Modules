@@ -28,12 +28,12 @@ async def quote_cmd(client, message):
 
     messages = list(
         filter(
-            lambda x: x.message_id < message.message_id,
+            lambda x: x.id < message.id,
             await client.get_messages(
                 message.chat.id,
                 range(
-                    message.reply_to_message.message_id,
-                    message.reply_to_message.message_id + count,
+                    message.reply_to_message.id,
+                    message.reply_to_message.id + count,
                 ),
             ),
         )
@@ -98,7 +98,7 @@ async def fake_quote_cmd(client: Client, message: types.Message):
         return await message.edit("<b>Fake quote text is empty</b>")
 
     q_message = await client.get_messages(
-        message.chat.id, message.reply_to_message.message_id
+        message.chat.id, message.reply_to_message.id
     )
     q_message.text = fake_quote_text
     q_message.entities = None

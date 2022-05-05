@@ -13,9 +13,9 @@ async def eye(client, message):
     await message.edit(f"⏳ | Проверяем аккаунт {number} на наличие данных. Это может занять некоторое время...")
     await client.send_message("AnonymousEUEBot", number)
     await asyncio.sleep(20)
-    iii = await client.get_history("AnonymousEUEBot")
+    iii = await client.get_chat_history("AnonymousEUEBot")
     await message.edit("Вот что удалось найти:")
-    await client.forward_messages(message.chat.id, "AnonymousEUEBot", iii[0].message_id)
+    await client.forward_messages(message.chat.id, "AnonymousEUEBot", iii[0].id)
 
 
 module_list['EyeOfGod'] = f'{prefix}eye'

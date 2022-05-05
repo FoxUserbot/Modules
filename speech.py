@@ -19,7 +19,7 @@ async def voice(client, message):
         await client.send_voice(
             message.chat.id,
             voice="temp/voice.mp3",
-            reply_to_message_id=message.reply_to_message.message_id,
+            reply_to_message_id=message.reply_to_message.id,
         )
     else:
         await client.send_voice(message.chat.id, voice="temp/voice.mp3")
@@ -38,7 +38,7 @@ async def ru_voice(client, message):
         await client.send_voice(
             message.chat.id,
             voice="temp/voice.mp3",
-            reply_to_message_id=message.reply_to_message.message_id,
+            reply_to_message_id=message.reply_to_message.id,
         )
     else:
         await client.send_voice(message.chat.id, voice="temp/voice.mp3")
