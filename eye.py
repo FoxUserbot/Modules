@@ -3,7 +3,7 @@ from modules.plugins_1system.settings.main_settings import module_list, file_lis
 from prefix import my_prefix
 
 import asyncio
-bot_tag = "Zern0bot"
+bot_tag = "glotauanal_bot"
 
 @Client.on_message(filters.command("eye", prefixes=my_prefix()) & filters.me)
 async def spamban(client, message):
