@@ -12,75 +12,7 @@ install_library('openai')
 from openai import AsyncOpenAI
 
 async def create_module(module_text):
-    promt = """
-Ты — разработчик модулей под FoxUserBot. Твоя задача — **переписать модуль с Hikka (на Telethon)** на **FoxUserBot (на Pyrogram)**.
-
-🔧 Основные правила:
-- Отвечай __ТОЛЬКО КОДОМ__, без комментариев, Markdown, кавычек или пояснений.
-- Используй только Pyrogram. **НЕЛЬЗЯ** использовать методы и синтаксис Telethon (`.conversation`, `.event`, `.respond`, `.pattern`, `await event.edit()`, и т.п.).
-- Все команды должны быть реализованы через `@Client.on_message(...)` и `filters.command(..., prefixes=my_prefix()) & filters.me`.
-- В конце обязательно добавляй строки для `module_list[...]` и `file_list[...]`.
-
-📥 Для сторонних библиотек (если нужно) используй:
-from requirements_installer import install_library  
-install_library("название_библиотеки")
-
-💡 Внимание: В Pyrogram для кастомных эмодзи в тексте используйте атрибут id, а не document_id.
-Пример:
-<emoji id=5326015457155620929></emoji>
-Вместо:
-<emoji document_id=5326015457155620929></emoji>
-
-📦 Предустановленные библиотеки (НЕ нужно устанавливать):
-- wheel
-- telegraph
-- requests
-- wget
-- pystyle
-- wikipedia
-- gTTS
-- kurigram
-- lyricsgenius
-
-🔁 Работа с async-генераторами:
-- Методы вроде `search_messages`, `get_chat_history`, `get_chat_members` — это async-генераторы.
-- Используй их через `async for`, **БЕЗ `await` перед ними**.
-
-✅ Пример:
-async for msg in client.get_chat_history("spambot", limit=1):  
-    await message.edit(msg.text)
-
-🚫 **Запрещено:**
-- НЕЛЬЗЯ использовать `await client.get_chat_history(...)` — вызовет ошибку.
-- НЕЛЬЗЯ создавать хендлеры (`@Client.on_message(...)`) внутри других функций. Это не работает в Pyrogram.
-- НЕЛЬЗЯ использовать `client.remove_handler(...)`, `conversation`, или `await conv.send_message(...)`.
-⚠️ Для ожидания ответа от бота, вместо Telethon-style `.conversation`, используй `client.listen()` с фильтром по ID бота и таймаутом.  
-
-
-
-📦 Пример корректного Pyrogram-модуля:
-from pyrogram import Client, filters  
-from modules.plugins_1system.settings.main_settings import module_list, file_list  
-from prefix import my_prefix  
-
-@Client.on_message(filters.command("spamban", prefixes=my_prefix()) & filters.me)  
-async def spamban(client, message):  
-    await message.edit("Checking your account for Spamban...")  
-    await client.unblock_user("spambot")  
-    await client.send_message("spambot", "/start")  
-    async for msg in client.get_chat_history("spambot", limit=1):  
-        await message.edit(msg.text)  
-
-module_list["SpamBan"] = f"{my_prefix()}spamban"  
-file_list["SpamBan"] = "spamban.py"
-
-==================
-
-Вот модуль, который нужно переписать:
-
-""" + module_text
-
-
+    promt = requests.get("https://pastebin.com/raw/DxzkSCNE").text + module_text
 
 
     client_ai  = AsyncOpenAI(
@@ -111,12 +43,14 @@ async def wine_hikka(client, message):
         if os.path.exists("downloads"):
             shutil.rmtree("downloads")
         module_name = message.reply_to_message.document.file_name.replace(".py", "")
-    elif len(message.command) > 1 and message.command[1].startswith("http"):
+    elif len(message.command) > 1 and (message.command[1].startswith("http") or message.command[1].startswith("https")):
         url = message.command[1]
         await message.edit(f"🦊 | Loading module from URL: {url}")
         try:
             response = requests.get(url)
-            response.raise_for_status() 
+            if response.status_code != 200:
+                await message.edit(f"🦊 | Error loading module from URL: {response.status_code}")
+                return
             file_content = response.text
             module_name = url.split("/")[-1].replace(".py", "")
         except requests.exceptions.RequestException as e:
