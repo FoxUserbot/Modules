@@ -133,12 +133,19 @@ async def nowplayed(client, message):
         currentSong = open("userdata/lastfm_current_song", "r+", encoding="utf-8").readline() 
         await message.edit(f"[🎶] Now playing: `{currentSong}`")
     except FileNotFoundError:
-        open("userdata/lastfm_username", "w+", encoding="utf-8")
-        nowplayed(client , message)
+        with open("userdata/lastfm_current_song", "w+", encoding="utf-8") as f:
+            f.write("")
+        try:
+            currentSong = open("userdata/lastfm_current_song", "r+", encoding="utf-8").readline() 
+            await message.edit(f"[🎶] Now playing: `{currentSong}`")
+        except Exception as e:
+            await message.edit(f"[❌] Ошибка при создании файла: {e}")
 
 
 @Client.on_message(filters.command("lastfm_config", prefixes=my_prefix()) & filters.me)
 async def lastfm_config(client, message):
+    
+    open("userdata/lastfm_username", "w+", encoding="utf-8")
     username = message.text.split()[1]
     
     usernameF = open("userdata/lastfm_username", "w+", encoding="utf-8")
@@ -186,8 +193,11 @@ async def autoplayed(client, message):
             channel = str(channel)
 
         id_in_channel_telegram = int(open("userdata/lastfm_id_in_channel_telegram", "r+", encoding="utf-8").readline())
-
-        currentSong = open("userdata/lastfm_current_song", "r+", encoding="utf-8").readline() 
+        try:
+            currentSong = open("userdata/lastfm_current_song", "r+", encoding="utf-8").readline() 
+        except:
+            open("userdata/lastfm_current_song", "w+", encoding="utf-8").write("")
+            currentSong = open("userdata/lastfm_current_song", "r+", encoding="utf-8").readline() 
         
         text = f"Now playing: `{currentSong}`"
         try:
