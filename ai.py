@@ -5,20 +5,21 @@ from requirements_installer import install_library
 
 import base64
 import requests
-import httpx
 import asyncio
 
 install_library('openai') 
 from openai import AsyncOpenAI, APIError
 
 public_key = "c2stb3ItdjEtNjg1YzZiMDc2YjJhNDE4M2VkNTUzOWIyMTk3ZWY4MTk3YjkxYTE1ZDMxOTAxZjQ2YTQ5MTk0NTFjYzkxYzRmZQ=="
+
 proxylist = ["127.0.0.1:2080"]
 
 modules = {
     "deepseek": "deepseek/deepseek-chat:free",
-    "gemini": "google/gemini-2.0-flash-001",
+    "gemini": "google/gemini-2.0-flash-exp:free",
+    "qwen": "qwen/qwq-32b:free:free",
+    
 }
-
 
 def get_proxy():
     if proxylist:
@@ -34,8 +35,6 @@ def get_proxy():
                 temp_proxy.append(_)
         except:
             pass
-        
-        
         try:
             url = "http://rootjazz.com/proxies/proxies.txt"
             response = requests.get(url, timeout=4)
@@ -45,11 +44,9 @@ def get_proxy():
                 temp_proxy.append(_)
         except:
             pass
-        
         proxies_list = temp_proxy[:200]
         proxylist.extend(proxies_list)
         return proxies_list
-
 
 @Client.on_message(filters.command("ai", prefixes=my_prefix()) & filters.me)
 async def ai(client, message):
@@ -72,7 +69,6 @@ async def ai(client, message):
                 base_url="https://openrouter.ai/api/v1",
                 api_key=str(base64.b64decode(public_key).decode('utf-8'))
             )
-            
             
             response = await client_ai.chat.completions.create(
                 model=model,
@@ -104,7 +100,6 @@ async def ai(client, message):
                             messages=[{"role": "user", "content": message_for_da}]
                         )
                         result = response.choices[0].message.content
-                            
                 except Exception as e:
                     print(f"ERROR: {e}")
                     print(f"[DEBUG] Proxy failed: {proxy}")
@@ -123,11 +118,11 @@ async def ai(client, message):
 """)
 
     except IndexError:
-        await message.edit("❌ Не указаны данные! Используйте: /ai <модель> <запрос>")
+        await message.edit(f"❌ Не указаны данные! Используйте: {my_prefix()}ai <модель> <запрос>")
     except APIError as e:
         await message.edit(f"❌ Ошибка API OpenRouter: {e}")
     except Exception as e:
         await message.edit(f"❌ Произошла непредвиденная ошибка: {e}")
 
-module_list['AI'] = f'{my_prefix()}AI [Gemini/DeepSeek] [Message]'
+module_list['AI'] = f'{my_prefix()}AI [Gemini/DeepSeek/Qwen] [Message]'
 file_list['AI'] = 'ai.py'

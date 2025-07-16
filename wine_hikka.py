@@ -6,24 +6,33 @@ from modules.plugins_1system.restarter import restart
 import base64
 import os
 import shutil
+
+
+install_library('openai requests')
+from openai import AsyncOpenAI
 import requests
 
-install_library('openai')
-from openai import AsyncOpenAI
-
-async def create_module(module_text):
-    promt = requests.get("https://pastebin.com/raw/DxzkSCNE").text + module_text
-
-
+async def create_module(module_text, module_name):
+    prompt = (
+        f"""
+{requests.get("https://pastebin.com/raw/trkXmL5g").text}
+{module_name}.py
+И его код: 
+```python
+{module_text}
+```
+"""
+    )
+    
     client_ai  = AsyncOpenAI(
                 base_url="https://openrouter.ai/api/v1",
                 api_key=str(base64.b64decode("c2stb3ItdjEtNjg1YzZiMDc2YjJhNDE4M2VkNTUzOWIyMTk3ZWY4MTk3YjkxYTE1ZDMxOTAxZjQ2YTQ5MTk0NTFjYzkxYzRmZQ==").decode('utf-8'))
             )
     response = await client_ai.chat.completions.create(
-                model="deepseek/deepseek-chat:free",
-                messages=[{"role": "user", "content": promt}]
+                model="deepseek/deepseek-chat-v3-0324:free",
+                messages=[{"role": "user", "content": prompt}]
             )
-    return response.choices[0].message.content
+    return response.choices[0].message.content.replace("```python", "").replace("```", "")
 
 
 
@@ -65,7 +74,7 @@ async def wine_hikka(client, message):
         return
 
     await message.edit(f"🦊 | Generating module...")
-    answer = await create_module(file_content)
+    answer = await create_module(file_content, module_name)
     file_path = f"modules/plugins_2custom/{module_name}.py"
     if answer is not None:
         with open(file_path, "w", encoding="utf-8") as f:
@@ -78,5 +87,5 @@ async def wine_hikka(client, message):
         await message.edit(f"🦊 | Error generating module :(")
 
 
-module_list['Wine Hikka'] = f'{my_prefix()}wine_hikka'
-file_list['Wine Hikka'] = 'wine_hikka.py'
+module_list['WineHikka'] = f'{my_prefix()}wine_hikka'
+file_list['WineHikka'] = 'wine_hikka.py'
