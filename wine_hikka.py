@@ -15,9 +15,10 @@ import requests
 async def create_module(module_text, module_name):
     prompt = (
         f"""
-{requests.get("https://pastebin.com/raw/trkXmL5g").text}
+{requests.get("https://pastebin.com/raw/RM61gXPy").text}
 {module_name}.py
-И его код: 
+========
+Вот код модуля: 
 ```python
 {module_text}
 ```
